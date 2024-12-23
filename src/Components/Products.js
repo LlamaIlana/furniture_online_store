@@ -21,7 +21,7 @@ import Chair4 from "../img/pic4.jpg";
 import Chair5 from "../img/pic5.jpg";
 import Chair6 from "../img/pic6.jpg";
 
-export default function Store() {
+export default function Products() {
   return (
     <div className="products">
       <h2>PRODUCTS</h2>

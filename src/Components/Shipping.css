@@ -1,0 +1,45 @@
+.delivery img {
+  width: 8rem;
+  height: auto;
+}
+.collect-container,
+.delivery-container {
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin: 2rem;
+  width: 40vw;
+  height: 20vh;
+}
+.ship-btn {
+  background-color: #49505d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+
+  cursor: pointer;
+}
+.ship-btn:hover {
+  background-color: #9b867b;
+}
+.back-to-cart {
+  margin: 2rem;
+  padding: 1rem;
+}
+.delivery {
+  display: flex;
+  justify-content: center;
+}
+.summary-section p {
+  font-size: 2rem;
+}
+.info-img {
+  width: 2rem !important;
+  height: auto !important;
+}
+
+.button-info {
+  background-color: pink !important;
+  margin-left: 3px !important;
+border: none;
+}
