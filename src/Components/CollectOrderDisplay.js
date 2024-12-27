@@ -20,7 +20,6 @@ export default function MyVerticallyCenteredModal(props) {
           to offer you the option to pick up your items directly from our office
           in Cape Town. Below are the details to help you with your collection:
         </p>
-
         <h5>Office Address:</h5>
         <p>
           BloomingBliss Events
@@ -31,7 +30,6 @@ export default function MyVerticallyCenteredModal(props) {
           <br />
           South Africa
         </p>
-
         <h5>Contact Information:</h5>
         <p>
           Phone: +27 21 555 1234
@@ -41,7 +39,6 @@ export default function MyVerticallyCenteredModal(props) {
           <br />
           WhatsApp: +27 72 123 4567
         </p>
-
         <h5>Office Hours:</h5>
         <p>
           Monday to Friday: 9:00 AM - 5:00 PM
@@ -50,7 +47,6 @@ export default function MyVerticallyCenteredModal(props) {
           <br />
           Sunday: Closed
         </p>
-
         <h5>How to Collect Your Order:</h5>
         <ul>
           <li>
@@ -59,11 +55,11 @@ export default function MyVerticallyCenteredModal(props) {
           </li>
           <li>
             Bring Your ID: Please bring a valid form of identification (such as
-            an ID card or driver’s license) when you come to collect your items.
+            an ID card or driver's license) when you come to collect your items.
           </li>
           <li>
             Arriving at the Office: Our office is located at 123 Creative Avenue
-            in Cape Town. It’s easily accessible via public transport or if you
+            in Cape Town. It's easily accessible via public transport or if you
             are driving, parking is available on-site.
           </li>
           <li>
@@ -75,9 +71,8 @@ export default function MyVerticallyCenteredModal(props) {
         <p>We look forward to seeing you at our office!</p>
       </Modal.Body>
       <Modal.Footer>
-      <Button onClick={props.onHide}>Cancel</Button>
+        <Button onClick={props.onHide}>Cancel</Button>
         <Button onClick={props.onHide}>Proceed</Button>
-
       </Modal.Footer>
     </Modal>
   );

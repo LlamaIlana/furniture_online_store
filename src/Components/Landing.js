@@ -14,15 +14,6 @@ import Chair5 from "../img/pic5.jpg";
 import Chair6 from "../img/pic6.jpg";
 
 
-
-
-
-
-
-
-
-
-
 export default function Landing() {
     return(
 <div>

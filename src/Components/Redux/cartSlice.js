@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem("myLocalStore")) || [];
 let counter = 0; // Counter for unique id
 
 const cartSlice = createSlice({

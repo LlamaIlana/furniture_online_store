@@ -1,5 +1,5 @@
 import "../Components/Cards.css";
-import "../Components/Store.css";
+import "../Components/Products.css";
 
 import Cards from "./Cards";
 import pic1 from "../img/store/pic1.jpg";

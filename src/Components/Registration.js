@@ -1,8 +1,7 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import "../Components/Registration.css";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 // Validation function
 const validate = (values) => {
@@ -84,6 +83,7 @@ const RegisterForm = () => {
 
   return (
     <div className="register-form">
+      <p>Register</p>
       <form onSubmit={formik.handleSubmit}>
         <div>
           <label htmlFor="firstname">First Name</label>
@@ -97,7 +97,7 @@ const RegisterForm = () => {
             placeholder="First Name"
           />
           {formik.touched.firstname && formik.errors.firstname ? (
-            <div>{formik.errors.firstname}</div>
+            <div className="error-message">{formik.errors.firstname}</div>
           ) : null}
         </div>
 
@@ -113,7 +113,7 @@ const RegisterForm = () => {
             placeholder="Last Name"
           />
           {formik.touched.surname && formik.errors.surname ? (
-            <div>{formik.errors.surname}</div>
+            <div className="error-message">{formik.errors.surname}</div>
           ) : null}
         </div>
 
@@ -129,7 +129,7 @@ const RegisterForm = () => {
             placeholder="Username"
           />
           {formik.touched.username && formik.errors.username ? (
-            <div>{formik.errors.username}</div>
+            <div className="error-message">{formik.errors.username}</div>
           ) : null}
         </div>
 
@@ -145,7 +145,7 @@ const RegisterForm = () => {
             placeholder="tester123@gmail.com"
           />
           {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
+            <div className="error-message">{formik.errors.email}</div>
           ) : null}
         </div>
 
@@ -161,7 +161,7 @@ const RegisterForm = () => {
             placeholder="Password"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
+            <div className="error-message">{formik.errors.password}</div>
           ) : null}
         </div>
 
@@ -176,18 +176,19 @@ const RegisterForm = () => {
             value={formik.values.validatePassword}
             placeholder="Confirm Password"
           />
-          {formik.touched.validatePassword &&
-          formik.errors.validatePassword ? (
-            <div>{formik.errors.validatePassword}</div>
+          {formik.touched.validatePassword && formik.errors.validatePassword ? (
+            <div className="error-message">
+              {formik.errors.validatePassword}
+            </div>
           ) : null}
         </div>
 
         <div className="form-buttons">
-          <button type="submit" disabled={!formik.isValid || !formik.dirty}>
-            Submit
-          </button>
           <button type="button" onClick={handleCancel}>
             Cancel
+          </button>
+          <button type="submit" disabled={!formik.isValid || !formik.dirty}>
+            Register
           </button>
         </div>
       </form>

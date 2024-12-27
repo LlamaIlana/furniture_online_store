@@ -1,19 +1,17 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import "../Components/AddressForm.css";
 
-// Validation
+// Validation function
 const validate = (values) => {
   const errors = {};
 
-  // Recipient Name
   if (!values.recipientName) {
     errors.recipientName = "*Required";
   } else if (values.recipientName.length > 15) {
     errors.recipientName = "*Must be 15 characters or less";
   }
-
-  // Recipient Number
   if (values.recipientNumber) {
     if (!/^[0-9]+$/.test(values.recipientNumber)) {
       errors.recipientNumber = "*Phone number must contain only digits";
@@ -23,28 +21,18 @@ const validate = (values) => {
       errors.recipientNumber = "*Phone number must be 15 digits or less";
     }
   }
-
-  // Street Address
   if (!values.streetAddress) {
     errors.streetAddress = "*Required";
   }
-
-  // Suburb
   if (!values.suburb) {
     errors.suburb = "*Required";
   }
-
-  // City
   if (!values.city) {
     errors.city = "*Required";
   }
-
-  // Province
   if (!values.province) {
     errors.province = "*Required";
   }
-
-  // Postal Code
   if (!values.postalCode) {
     errors.postalCode = "*Required";
   } else if (!/^[0-9]+$/.test(values.postalCode)) {
@@ -57,7 +45,7 @@ const validate = (values) => {
 const AddressForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
-  
+
   const formik = useFormik({
     initialValues: {
       recipientName: "",
@@ -70,9 +58,12 @@ const AddressForm = () => {
       postalCode: "",
     },
     validate,
-    onSubmit: (values) => {
-      setIsSubmitted(true);
-      console.log("Form Submitted", values);
+    onSubmit: (values, { setSubmitting }) => {
+      setTimeout(() => {
+        console.log("Form Submitted", values);
+        setIsSubmitted(true); 
+        setSubmitting(false); 
+      }, 1000);
     },
   });
 
@@ -82,143 +73,162 @@ const AddressForm = () => {
 
   return (
     <div className="delivery-form">
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <label htmlFor="recipientName">Recipient Name</label>
-          <input
-            id="recipientName"
-            name="recipientName"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.recipientName}
-            placeholder="Recipient Name"
-          />
-          {formik.touched.recipientName && formik.errors.recipientName && (
-            <div>{formik.errors.recipientName}</div>
-          )}
-        </div>
+      {/* Conditional rendering of the form */}
+      {!isSubmitted ? (
+        <form onSubmit={formik.handleSubmit}>
+          <div>
+            <label htmlFor="recipientName">Recipient Name</label>
+            <input
+              id="recipientName"
+              name="recipientName"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.recipientName}
+              placeholder="Recipient Name"
+            />
+            {formik.touched.recipientName && formik.errors.recipientName && (
+              <div className="error-message">{formik.errors.recipientName}</div>
+            )}
+          </div>
 
-        <div>
-          <label htmlFor="recipientNumber">Recipient Number</label>
-          <input
-            id="recipientNumber"
-            name="recipientNumber"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.recipientNumber}
-            placeholder="Recipient Number"
-          />
-          {formik.touched.recipientNumber && formik.errors.recipientNumber && (
-            <div>{formik.errors.recipientNumber}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="recipientNumber">Recipient Number</label>
+            <input
+              id="recipientNumber"
+              name="recipientNumber"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.recipientNumber}
+              placeholder="Recipient Number"
+            />
+            {formik.touched.recipientNumber &&
+              formik.errors.recipientNumber && (
+                <div className="error-message">
+                  {formik.errors.recipientNumber}
+                </div>
+              )}
+          </div>
 
-        <div>
-          <label htmlFor="streetAddress">Street Address</label>
-          <input
-            id="streetAddress"
-            name="streetAddress"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.streetAddress}
-            placeholder="Street Address"
-          />
-          {formik.touched.streetAddress && formik.errors.streetAddress && (
-            <div>{formik.errors.streetAddress}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="streetAddress">Street Address</label>
+            <input
+              id="streetAddress"
+              name="streetAddress"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.streetAddress}
+              placeholder="Street Address"
+            />
+            {formik.touched.streetAddress && formik.errors.streetAddress && (
+              <div className="error-message">{formik.errors.streetAddress}</div>
+            )}
+          </div>
 
-        <div>
-          <label htmlFor="complexBuilding">Complex or Building</label>
-          <input
-            id="complexBuilding"
-            name="complexBuilding"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.complexBuilding}
-            placeholder="Complex or Building Name"
-          />
-          {formik.touched.complexBuilding && formik.errors.complexBuilding && (
-            <div>{formik.errors.complexBuilding}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="complexBuilding">Complex or Building</label>
+            <input
+              id="complexBuilding"
+              name="complexBuilding"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.complexBuilding}
+              placeholder="Complex or Building Name"
+            />
+            {formik.touched.complexBuilding &&
+              formik.errors.complexBuilding && (
+                <div className="error-message">
+                  {formik.errors.complexBuilding}
+                </div>
+              )}
+          </div>
 
-        <div>
-          <label htmlFor="suburb">Suburb</label>
-          <input
-            id="suburb"
-            name="suburb"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.suburb}
-            placeholder="Suburb"
-          />
-          {formik.touched.suburb && formik.errors.suburb && (
-            <div>{formik.errors.suburb}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="suburb">Suburb</label>
+            <input
+              id="suburb"
+              name="suburb"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.suburb}
+              placeholder="Suburb"
+            />
+            {formik.touched.suburb && formik.errors.suburb && (
+              <div className="error-message">{formik.errors.suburb}</div>
+            )}
+          </div>
 
-        <div>
-          <label htmlFor="city">City</label>
-          <input
-            id="city"
-            name="city"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.city}
-            placeholder="City"
-          />
-          {formik.touched.city && formik.errors.city && (
-            <div>{formik.errors.city}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              name="city"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.city}
+              placeholder="City"
+            />
+            {formik.touched.city && formik.errors.city && (
+              <div className="error-message">{formik.errors.city}</div>
+            )}
+          </div>
 
-        <div>
-          <label htmlFor="province">Province</label>
-          <input
-            id="province"
-            name="province"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.province}
-            placeholder="Province"
-          />
-          {formik.touched.province && formik.errors.province && (
-            <div>{formik.errors.province}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="province">Province</label>
+            <input
+              id="province"
+              name="province"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.province}
+              placeholder="Province"
+            />
+            {formik.touched.province && formik.errors.province && (
+              <div className="error-message">{formik.errors.province}</div>
+            )}
+          </div>
 
-        <div>
-          <label htmlFor="postalCode">Postal Code</label>
-          <input
-            id="postalCode"
-            name="postalCode"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.postalCode}
-            placeholder="Postal Code"
-          />
-          {formik.touched.postalCode && formik.errors.postalCode && (
-            <div>{formik.errors.postalCode}</div>
-          )}
-        </div>
-    {/* Submit Button */}
+          <div>
+            <label htmlFor="postalCode">Postal Code</label>
+            <input
+              id="postalCode"
+              name="postalCode"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.postalCode}
+              placeholder="Postal Code"
+            />
+            {formik.touched.postalCode && formik.errors.postalCode && (
+              <div className="error-message">{formik.errors.postalCode}</div>
+            )}
+          </div>
 
-        <button type="submit">Submit</button>
-        {isSubmitted && <div>Form successfully submitted!</div>}
-    {/* Cancel Button */}
-    <button type="button" onClick={handleCancel}>
-          Cancel
-        </button>
-      </form>
+          {/* Submit Button */}
+          <button type="submit" disabled={formik.isSubmitting}>
+            Submit
+          </button>
+
+          {/* Cancel Button */}
+          <button type="button" onClick={handleCancel}>
+            Cancel
+          </button>
+        </form>
+      ) : (
+        // Success message after form submission
+        <div className="success-message">
+          Shipping address successfully submitted!
+          <button className="back-to-btn" onClick={() => navigate("/shipping")}>
+            Back to Cart
+          </button>
+        </div>
+      )}
     </div>
   );
 };

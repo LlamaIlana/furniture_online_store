@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { Button, Modal } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import "../Components/Login.css";
 
 // Validation
 const validate = (values) => {
   const errors = {};
+  if (!values.username) {
+    errors.username = "*Required";
+  }
+
   if (!values.email) {
     errors.email = "*Required";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -30,19 +34,31 @@ const Login = ({ handleLogin }) => {
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
 
+  // Check for login state in localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      handleLogin(storedUser); 
+    }
+  }, [handleLogin]);
+  
+
   const handleCancel = () => {
     navigate("/");
   };
 
   const formik = useFormik({
     initialValues: {
-      username: "",  
+      username: "",
       email: "",
       password: "",
     },
     validate,
     onSubmit: (values) => {
-      handleLogin(values.username); // Pass name to handleLogin instead of email
+      // Save the logged-in user in localStorage
+      localStorage.setItem("loggedInUser", values.username);
+      handleLogin(values.username); 
+      setModalShow(false); 
     },
   });
 
@@ -60,24 +76,22 @@ const Login = ({ handleLogin }) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Login
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} className="login-form">
             <div>
-              <label htmlFor="name">Username:</label>
+              <label htmlFor="username">Username:</label>
               <input
-                id="username"  // Update id to "name"
-                name="username"  // Use "name" for the field name
+                id="username"
+                name="username"
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.username}
                 onBlur={formik.handleBlur}
               />
-              {formik.errors.name && formik.touched.name && (
-                <div style={{ color: "red" }}>{formik.errors.name}</div>
+              {formik.errors.username && formik.touched.username && (
+                <div style={{ color: "red" }}>{formik.errors.username}</div>
               )}
             </div>
             <div>
@@ -108,15 +122,19 @@ const Login = ({ handleLogin }) => {
                 <div style={{ color: "red" }}>{formik.errors.password}</div>
               )}
             </div>
-            <Button type="submit" variant="primary" onClick={handleCancel}>
-              Submit
-            </Button>
+            <div className="login-button-container">
+              <Button variant="secondary" onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button type="submit" variant="primary">
+                Login
+              </Button>
+            </div>
           </form>
         </Modal.Body>
       </Modal>
     </div>
   );
 };
-
 
 export default Login;

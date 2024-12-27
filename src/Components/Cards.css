@@ -6,9 +6,9 @@
   margin-bottom: 1.5rem;
 }
 .cards {
-  display: flex; /* Make the container a flexbox */
+  display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribute space evenly */
+  justify-content: space-between;
   border: 1px solid #ddd;
   padding: 1rem;
   margin: 1rem;
@@ -22,7 +22,6 @@
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
-
 .description {
   font-size: 1rem;
   margin-bottom: 1.5rem;
@@ -46,4 +45,16 @@ button:hover {
 .cards-container {
   display: flex;
   justify-content: center;
+}
+/*Popup msg for add to cart*/
+.popup {
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #459846;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

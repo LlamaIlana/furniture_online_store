@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button } from 'react-bootstrap';  
+import { Button } from "react-bootstrap";
 import Logo from "../img/Logo2.png";
-import Cart from "../img/cart.png"; 
+import Cart from "../img/cart.png";
 import fullCart from "../img/full-cart.png";
 import "../Components/Header.css";
 import Login from "./Login";
@@ -11,18 +11,19 @@ import Login from "./Login";
 function Header() {
   const cartProduct = useSelector((state) => state.cart);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");  // Will store only the user's name
+  const [username, setUsername] = useState(""); // Will store only the user's name
 
   // Login Function
   const handleLogin = (name) => {
-    setUsername(name);  // Set the name (not the email) as the username
+    setUsername(name);
     setIsLoggedIn(true);
   };
 
   // Logout Function
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUsername("");  // Reset the username on logout
+    setUsername("");
+    localStorage.removeItem("loggedInUser");
   };
 
   // Function to amend cart display between full and empty
@@ -63,17 +64,17 @@ function Header() {
           <Link to="/cart">{cartDisplay()}</Link>
           {/* If logged in remove registration btn*/}
           {!isLoggedIn && (
-  <Link to="/register">
-    <button>Register</button>
-  </Link>
-)}
+            <Link to="/register">
+              <button>Register</button>
+            </Link>
+          )}
 
           <div className="logout">
             {!isLoggedIn ? (
               <Login handleLogin={handleLogin} /> // Pass handleLogin to Login component
             ) : (
               <div className="login">
-                <p className="welcome-msg">Welcome Back, {username}!</p> 
+                <p className="welcome-msg">Welcome Back, {username}!</p>
                 <Button variant="secondary" onClick={handleLogout}>
                   Log Out
                 </Button>
