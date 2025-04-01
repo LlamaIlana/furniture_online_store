@@ -10,7 +10,7 @@ import SignInForm from "./Components/Login.js";
 import RegisterForm from "./Components/Registration.js";
 import AddressForm from "./Components/AddressForm.js";
 import Contact from "./Components/Contact.js";
-import "./index.css";
+
 
 function App() {
   return (
